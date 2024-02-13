@@ -3,7 +3,7 @@ var food = {
   type: "cow's",
   weigh: 1,
   getInfo: function() {
-    console.log("food: " + this.kind + "\n" + "type: " + this.type + "\n" + "weigh: " + this.weigh);
+   // console.log("food: " + this.kind + "\n" + "type: " + this.type + "\n" + "weigh: " + this.weigh);
     for (var key in this) {
       if (key !== 'getInfo') 
       {
