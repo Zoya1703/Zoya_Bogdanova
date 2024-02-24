@@ -1,42 +1,47 @@
-// Об'єкт зі списком послуг та їх вартістю
 var services = {
-    "стрижка": 100,
-    "гоління": 30,
-    "Миття голови": 100
+    "стрижка": '60 грн',
+    "гоління": '80 грн',
+    "Миття голови": '100грн' 
 };
 
-// Додавання нової послуги
-services['Розбити скло'] = 200;
-console.log("Розбити скло");
+function getServicePrices() {
+    return Object.values(services).map(price => parseFloat(price));
+};
 
-services['Грязна шия'] = 200;
-console.log("Грязна шия");
+function calculateTotalPrice() {
+    var prices = getServicePrices();
+    var totalPrice = 0;
+    for (var i = 0; i < prices.length; i++) {
+        totalPrice += prices[i];
+    }
+    return totalPrice; 
+}
 
-
-
-function totalPrice() {
-    var total = 0;
-    for (var key in services) {
-        if (typeof services[key] === 'number') {
-            total += services[key];
+function calculateMinPrice() {
+    var prices = getServicePrices();
+    var minPrice = Infinity;
+    for (var i = 0; i < prices.length; i++) {
+        if (prices[i] < minPrice) {
+            minPrice = prices[i];
         }
     }
-    return total;
+    return minPrice;
 }
 
-
-function minPrice() {
-    var prices = Object.values(services); 
-    return Math.round(...prices);
+function calculateMaxPrice() {
+    var prices = getServicePrices();
+    var maxPrice = -Infinity;
+    for (var i = 0; i < prices.length; i++) {
+        if (prices[i] > maxPrice) {
+            maxPrice = prices[i];
+        }
+    }
+    return maxPrice;
 }
 
+services['Розбити скло'] = 200;
+services['манікюр'] = 300;
 
-function maxPrice() {
-    var prices = Object.values(services); 
-    return Math.round(...prices); 
-}
-
-
-console.log("Загальна вартість послуг:", totalPrice() + " грн");
-console.log("Мінімальна вартість послуг:", minPrice() + " грн");
-console.log("Максимальна вартість послуг:", maxPrice() + " грн");
+console.log("Загальна вартість послуг: " + calculateTotalPrice() + " грн");
+console.log("Мінімальна вартість послуг: " + calculateMinPrice() + " грн");
+console.log("Максимальна вартість послуг: " + calculateMaxPrice() + " грн");
